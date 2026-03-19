@@ -1,0 +1,25 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+
+
+
+spring:
+  application:
+    name: springboot-week03 测试环境
+
+
+#自定义配置
+app:
+  app-name: 企业管理项目
+  version: 1.0.0
+  description: Spring Boot 3.5.11 实战项目
+#  envs: {"dev", "test", "prod"}
+#  author:
+#    name: yyx
+#    website: https://github.com/Bae-04/Springboot-samples-main
+#    email: 1492127902@qq.com
+#    tokens: 2000
+#    enabled:
