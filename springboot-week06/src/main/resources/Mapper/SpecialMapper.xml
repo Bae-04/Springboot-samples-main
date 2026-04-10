@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=接口全类名 -->
+<mapper namespace="top.yxyan.springbootweek06.mapper.SpecialMPMapper">
+
+    <!-- 通用结果映射 -->
+    <resultMap id="BaseResultMap" type="top.yxyan.springbootweek06.entity.Special">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="view_count" property="viewCount"/>
+        <result column="followers_count" property="followersCount"/>
+        <result column="is_following" property="isFollowing"/>
+        <result column="introduction" property="introduction"/>
+        <result column="section_list" property="sectionList"/>
+        <result column="banner" property="banner"/>
+        <result column="updated" property="updated"/>
+    </resultMap>
+
+    <!-- 条件查询 -->
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        SELECT * FROM special
+        <where>
+            <!-- 条件1：标题不为空时，模糊查询 -->
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <!-- 条件2：最小浏览量 -->
+            <if test="minViewCount != null">
+                AND view_count >= #{minViewCount}
+            </if>
+            <!-- 条件3：关注状态 -->
+            <if test="isFollowing != null and isFollowing != ''">
+                AND is_following = #{isFollowing}
+            </if>
+        </where>
+        ORDER BY updated DESC
+    </select>
+
+    <!-- 批量删除 -->
+    <delete id="batchDelete">
+        DELETE FROM special WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 增加浏览量 -->
+    <update id="incrementViewCount">
+        UPDATE special SET view_count = view_count + 1 WHERE id = #{id}
+    </update>
+
+    <!-- 增加关注数 -->
+    <update id="incrementFollowersCount">
+        UPDATE special SET followers_count = followers_count + 1 WHERE id = #{id}
+    </update>
+</mapper>
