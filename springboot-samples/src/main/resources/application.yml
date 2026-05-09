@@ -1,0 +1,28 @@
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 1492127902@qq.com
+    password: dbosqwadkpwmfhje
+    protocol: smtp
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.port: 465
+    properties.mail.display.sendmail: Java
+    properties.mail.display.sendname: Spring Boot Email
+    properties.mail.smtp.ssl.enable: true
+#    properties.mail.smtp.starttls.enable: true
+#    properties.mail.smtp.starttls.required: true
+    default-encoding: utf-8
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot_samples?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 4321
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
